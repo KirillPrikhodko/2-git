@@ -1,0 +1,21 @@
+filter {
+    criteria {
+        afterDate('15-05-2015')
+    }
+    actions {
+        commit()
+    }
+    filter {
+        criteria {
+            minimumX(5)
+        }
+        extractions {
+            custom {
+                return  [myVersion: readFile('version.txt')]
+            }
+        }
+        actions {
+            tag("qualified-$myVersion")
+        }
+    }
+}
